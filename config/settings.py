@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third Party
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_spectacular',
     # Custom
     'accounts',
 ]
@@ -112,7 +113,14 @@ AUTH_USER_MODEL = 'accounts.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+# Spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'MY Django API',
+    'DESCRIPTION': 'Django DRF API Doc',
+    'VERSION': '1.0.0',
 }
 
 # Simple JWT
