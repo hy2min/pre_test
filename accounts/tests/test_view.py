@@ -12,7 +12,6 @@ def test_account_create_api_view():
         "nickname": "user5"
     }
     response = client.post('/api/accounts/signup/', payload, format='json')
-    print(response.data)
     assert response.status_code == 201
     assert response.data['username'] == "user5"
     assert response.data['nickname'] == "user5"
