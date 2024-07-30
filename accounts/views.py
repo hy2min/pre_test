@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from .models import User
 from .serializers import AccountSerializer
@@ -24,3 +28,11 @@ class AccountCreateAPIView(APIView) :
                 "roles": roles
                 }, status=201)
                 
+class CustomTokenObtainPairView(TokenObtainPairView) :
+    def post(self,request) :
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True) :
+            token = serializer.validated_data
+            return Response({
+                "token": token['access']
+            },status=200)
